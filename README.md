@@ -25,6 +25,7 @@ Let's say you have a table named posts, and it contains the following
 data:
 
 |id|created_at|updated_at|added_by     |title          |content|
+|--|----------|----------|-------------|---------------|-------|
 | 1|2015-08-06|2015-08-06|Lisa Marie   |Elvis had a Twin|On January 8, 1935, Elvis Aron (later spelled Aaron) Presley was born at his parents' two-room house in East Tupelo, Mississippi, about 35 minutes after his identical twin brother, Jesse Garon, who was stillborn.|
 | 2|2015-08-06|2015-08-06|Priscilla    |Graceland       |In 1957, when he was just 22, Elvis shelled out $102,500 for Graceland, the Memphis mansion that served as his home base for two decades.|
 | 3|2015-08-06|2015-08-06|Elvis Himself|Col. Tom Barker |Elvis's future manager immigrated illegally to America as a young man, where he reinvented himself as Tom Parker and claimed to be from West Virginia. He worked as a pitchman for traveling carnivals, followed by stints as dog catcher and pet cemetery founder, among other occupations, then managed the careers of several country music singers.|
