@@ -1,6 +1,6 @@
-= Tablematic
+# Tablematic
 
-== Introduction
+## Introduction
 There are a bunch of other Rails table generators out there. This is mine.
 
 Tabletastic is a gem to help quickly emit tabular data in a Rails web
@@ -9,11 +9,11 @@ it seemed like I could make it generic and package it as a gem, and 2)
 companies always want to see open source code samples when you apply
 for jobs, so it made sense to create some!
 
-== Installation
+## Installation
 (Eventually, when I put this on rubygems) in your Rails project, Gemfile:
   gem "tablematic"
 
-== Usage
+## Usage
 The simplest use of tablematic is to invoke the helper method with a
 variable that contains a collection of ActiveRecord objects, thusly:
 
@@ -23,6 +23,7 @@ variable that contains a collection of ActiveRecord objects, thusly:
 
 Let's say you have a table named posts, and it contains the following
 data:
+
 
 |id|created_at|updated_at|added_by     |title          |content|
 |--|----------|----------|-------------|---------------|-------|
@@ -80,12 +81,12 @@ Interesting stuff above:
 * It also includes the parameter name and datatype on each column in case that's useful for styling (e.g., you might want to make integers align right).
 * Tables have the tablematic class by default.
 
-=== Customizing output
+### Customizing output
 The defaults are probably not exactly what you need, so you can tweak things as needed by
 supplying options in an hash as the second parameter to table_for. Here are some of the
 supported options:
 
-==== table_class:
+#### table_class:
 A string or array of strings to use as class name(s) on the table. This is handy if you're
 using a CSS framework like bootstrap:
 
@@ -100,7 +101,7 @@ yields
 ...
 ```
 
-==== attributes:
+#### attributes:
 Limits the output to only those attributes included in the array. E.g.,
 
 ```erb
@@ -115,7 +116,7 @@ the value is the title:
 <%= table_for(@posts, attributes: [{title: 'A cool title'}, {content: 'Awesome content'}]) %>
 ```
 
-=== Code Blocks for additional per-row output
+### Code Blocks for additional per-row output
 Let's say you want to include links to Edit or Delete actions on each row along
 with the table values. Anything that is supplied in a block to the table_for
 method will be appended to the end of each row that is generated. For example, 
@@ -154,7 +155,7 @@ will generate the following:
 ...
 ```
 
-=== Global Configuration
+### Global Configuration
 Right now there's only one option you can configure globally - I'm working
 on that. Here's how you do it - in an initializer, plop the following code:
 
@@ -168,7 +169,7 @@ This will make the default CSS classes on every generated table include the
 table and table-condensed classes, so you don't have to specify it explicitly
 everywhere you use the helper.
 
-== TODO
+## TODO
 * Upload to rubygems and become FOSS famous.
 * Setup TravisCI
 * Change string additions to use << instead because string addition is expensive (or better yet use content_tag).
@@ -180,13 +181,13 @@ everywhere you use the helper.
 * Configurable class namespaces, some of that stuff is already there just haven't finished it.
 * Make it work w/ regular old arrays of hashes as well as AR.
 
-== Note on Patches/Pull Requests
+## Note on Patches/Pull Requests
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add specs for it.
 * Commit.
 * Send me a pull request. Bonus points for topic branches.
 
-== Copyright
+## Copyright
 Copyright 2015 Mike Desjardins. See MIT-LICENSE for details.
 
