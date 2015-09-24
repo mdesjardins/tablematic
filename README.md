@@ -73,7 +73,7 @@ Calling table_for on the table above would generate a table that looks like this
       <td class='content text'>Elvis’s future manager immigrated illegally to America as a young man, where he reinvented himself as Tom Parker and claimed to be from West Virginia. He worked as a pitchman for traveling carnivals, followed by stints as dog catcher and pet cemetery founder, among other occupations, then managed the careers of several country music singers.</td>
     </tr>
   </tbody>
-</table> 
+</table>
 ```
 
 Interesting stuff above:
@@ -119,7 +119,7 @@ the value is the title:
 ### Code Blocks for additional per-row output
 Let's say you want to include links to Edit or Delete actions on each row along
 with the table values. Anything that is supplied in a block to the table_for
-method will be appended to the end of each row that is generated. For example, 
+method will be appended to the end of each row that is generated. For example,
 
 ```erb
 <% table_for(@posts) do |post| %>
@@ -170,16 +170,15 @@ table and table-condensed classes, so you don't have to specify it explicitly
 everywhere you use the helper.
 
 ## TODO
-* Upload to rubygems and become FOSS famous.
-* Setup TravisCI
 * Change string additions to use << instead because string addition is expensive (or better yet use content_tag).
+* Setup TravisCI.
 * An exclude option to easily exclude columns, including at the global level.
 * Integration specs for better testing w/ Rails.
-* Maybe it'd be cool to have optional footers with totals? Might be wonky w/ pagination.
-* A way to specify column headings when you're including additional stuff in a block.
-* A way to specify that generate class names should use hyphens instead of underscores
+* A way to specify that generate class names should use hyphens instead of underscores.
 * Configurable class namespaces, some of that stuff is already there just haven't finished it.
 * Make it work w/ regular old arrays of hashes as well as AR.
+* Maybe it'd be cool to have optional footers with totals? Might be wonky w/ pagination.
+* A way to specify column headings when you're including additional stuff in a block.
 
 ## Note on Patches/Pull Requests
 * Fork the project.
@@ -190,4 +189,3 @@ everywhere you use the helper.
 
 ## Copyright
 Copyright 2015 Mike Desjardins. See MIT-LICENSE for details.
-
