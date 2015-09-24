@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tablematic (0.0.1)
+    tablematic (0.0.2)
       rails (~> 4.1.0)
 
 GEM
