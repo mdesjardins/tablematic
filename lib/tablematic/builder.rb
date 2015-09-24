@@ -1,5 +1,8 @@
 module TableHelper
   class TableBuilder
+    extend Forwardable
+    def_delegators :@view_context, :concat, :content_tag, :capture
+
     def initialize(records, attr, opts={})
       @records = records
       @attr = attr
@@ -10,14 +13,11 @@ module TableHelper
     end
 
     def build(view_context, &block)
-      result = "<table class='#{table_classes}'>"
-      result += emit_html_heading
-      result += emit_html_rows(view_context, &block)
-      result += "</table>"
-      result.html_safe
-    end
-
-    def output_buffer=(other)
+      @view_context = view_context
+      content_tag(:table, class: table_classes) do
+        emit_html_heading +
+        emit_html_rows(&block)
+      end.html_safe
     end
 
     protected
@@ -28,28 +28,31 @@ module TableHelper
     end
 
     def emit_html_heading
-      result = "<thead><tr>"
-      @attr.each do |attribute|
-        result += "<th class='#{attribute_css_class(attribute)} #{attribute_type_css_class(attribute)}'>#{column_heading_for(attribute)}</th>"
+      content_tag(:thead) do
+        content_tag(:tr) do
+          @attr.each do |attribute|
+            css_classes = "#{attribute_css_class(attribute)} #{attribute_type_css_class(attribute)}"
+            concat(content_tag(:th, column_heading_for(attribute), class: css_classes))
+          end
+        end
       end
-      result += "</tr></thead>"
     end
 
-    def emit_html_rows(view_context, &block)
-      result = "<tbody>"
-      @records.each_with_index do |record,i|
-        odd_even = i % 2 == 0 ? "#{@namespace}even" : "#{@namespace}odd"
-        result += "<tr class='#{odd_even}'>"
-        append_to_rows = block_given? ? view_context.capture(record, &block) : ''
-        @attr.each do |attribute|
-          message = attribute.is_a?(Hash) ? attribute.keys.first.to_sym : attribute.to_sym
-          value = record.send(message).to_s
-          result += "<td class='#{attribute_css_class(attribute)} #{attribute_type_css_class(attribute)}'>#{value}</td>"
+    def emit_html_rows(&block)
+      content_tag(:tbody) do
+        @records.each_with_index do |record,i|
+          columns = ''
+          @attr.each do |attribute|
+            message = attribute.is_a?(Hash) ? attribute.keys.first.to_sym : attribute.to_sym
+            value = record.send(message).to_s
+            columns << content_tag(:td, value, class: "#{attribute_css_class(attribute)} #{attribute_type_css_class(attribute)}")
+          end
+          columns += capture(record, &block) if block_given?
+
+          odd_even = i % 2 == 0 ? "#{@namespace}even" : "#{@namespace}odd"
+          concat(content_tag(:tr, columns.html_safe, class: odd_even))
         end
-        result += append_to_rows
-        result += "</tr>"
       end
-      result += "</tbody>"
     end
 
     def attribute_css_class(attribute_name)
